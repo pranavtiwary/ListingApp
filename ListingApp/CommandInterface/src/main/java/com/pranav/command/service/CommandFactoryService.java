@@ -1,9 +1,12 @@
-package com.pranav.command.factory;
+package com.pranav.command.service;
 
 
 import com.pranav.command.error.CommandNotValidException;
 import com.pranav.command.type.ICommand;
 import com.pranav.command.type.RegisterUserCmd;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.util.Objects;
@@ -12,9 +15,15 @@ import java.util.Objects;
  * CommandFactory : Class used to build all commands
  *
  */
-public class CommandFactory {
+@Component
+public class CommandFactoryService {
 
-    public static ICommand createCommand(String input) {
+    @Autowired
+    @Qualifier("RegisterCommandService")
+    private ICommandService registerCommandService;
+
+
+    public ICommand createCommand(String input) {
         if(!StringUtils.hasLength(input)){
             throw new CommandNotValidException();
         }
@@ -23,10 +32,10 @@ public class CommandFactory {
         String commandName = commandArray[0];
         switch (commandName){
             case RegisterUserCmd.COMMAND_NAME:
-                command = new RegisterUserCmd(commandArray);
+                command = new RegisterUserCmd(commandArray, registerCommandService);
                 break;
             case "":
-                command = new RegisterUserCmd(commandArray);
+                command = null;
                 break;
         }
         if(Objects.isNull(command)){
