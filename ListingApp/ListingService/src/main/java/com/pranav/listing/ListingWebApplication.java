@@ -1,4 +1,4 @@
-package com.pranav.web;
+package com.pranav.listing;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
