@@ -12,7 +12,8 @@ public class UserServiceAdapter{
     private String userServiceUrl;
 
     public void registerUser(String username){
-        System.out.println("Goign to Register user : "+ username);
+        System.out.println("Going to Register user : "+ username);
+
     }
 
     @PostConstruct
