@@ -7,11 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@Component
 public class CommandLineAppStartupRunner implements CommandLineRunner {
 
     @Autowired
@@ -39,7 +37,6 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
                 ex.printStackTrace();
             }
         }
-        ConfigurableApplicationContext ctx = SpringApplication.run(CommandApplication.class, args);
-        ctx.close();
+        System.out.println("Bye Bye");
     }
 }

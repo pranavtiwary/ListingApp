@@ -8,12 +8,18 @@ import com.pranav.command.type.RegisterUserCmd;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+@SpringBootTest
+@ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CommandFactoryTest {
 
-    private CommandFactoryService factory = new CommandFactoryService();
+    @Autowired
+    private CommandFactoryService factory ;
 
     @Test
     public void testRegisterCommand_Success(){
