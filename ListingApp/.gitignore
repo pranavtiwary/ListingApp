@@ -1,0 +1,6 @@
+*/target/**
+CommandInterface/target/**
+ListingService/target/**
+UserService/target/**
+target/**
+build/**
