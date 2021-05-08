@@ -1,138 +1,60 @@
-
-Project
-        Maven ProjectGradle Project
-        Language
-        JavaKotlinGroovy
-        Spring Boot
-        2.5.0 (SNAPSHOT)2.5.0 (RC1)2.4.6 (SNAPSHOT)2.4.52.3.11 (SNAPSHOT)2.3.10
-        Project Metadata
-        Group
-        com.pranav
-        Artifact
-        UserService
-        Name
-        UserService
-        Description
-        Spring Boot User Security Service
-        Package name
-        com.pranav.UserService
-        Packaging
-        JarWar
-        Java
-        16118
-        DependenciesADD DEPENDENCIES...⌘ + B
-        Spring Boot DevTools DEVELOPER TOOLS
-        Provides fast application restarts, LiveReload, and configurations for enhanced development experience.
-        Spring Boot Actuator OPS
-        Supports built in (or custom) endpoints that let you monitor and manage your application - such as application health, metrics, sessions, etc.
-        H2 Database SQL
-        Provides a fast in-memory database that supports JDBC API and R2DBC access, with a small (2mb) footprint. Supports embedded and server modes as well as a browser based console application.
-        Spring Data JPA SQL
-        Persist data in SQL stores with Java Persistence API using Spring Data and Hibernate.
-        Lombok DEVELOPER TOOLS
-        Java annotation library which helps to reduce boilerplate code.
-        Spring Configuration Processor DEVELOPER TOOLS
-        Generate metadata for developers to offer contextual help and "code completion" when working with custom configuration keys (ex.application.properties/.yml files).
-        Spring Web WEB
-        Build web, including RESTful, applications using Spring MVC. Uses Apache Tomcat as the default embedded container.
-        Spring Security SECURITY
-        Highly customizable authentication and access-control framework for Spring applications.
-        GENERATE⌘ + ⏎EXPLORECTRL + SPACESHARE...
-        UserService.zip
-        .gitignore
-        .mvn
-        HELP.md
-        mvnw
-        mvnw.cmd
-        pom.xml
-        src
-        DOWNLOADCOPY
-        <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.5</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-    <groupId>com.pranav</groupId>
-    <artifactId>UserService</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>UserService</name>
-    <description>Spring Boot User Security Service</description>
+
+    <groupId>org.pranav</groupId>
+    <artifactId>ListingApp</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+
     <properties>
-        <java.version>1.8</java.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <modules>
+        <module>CommandInterface</module>
+        <module>UserService</module>
+        <module>ListingService</module>
+    </modules>
+    <repositories>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>
-
-        DOWNLOAD⌘ + ⏎CLOSEESC
