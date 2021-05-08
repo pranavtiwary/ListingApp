@@ -1,12 +1,14 @@
+package com.pranav.user;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CommandApplication {
+public class UserWebApplication {
 
 	public static void main(String[] args) {
 
-		SpringApplication.run(CommandApplication.class, args);
+		SpringApplication.run(UserWebApplication.class, args);
 
 	}
 
