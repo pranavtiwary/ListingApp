@@ -41,7 +41,7 @@ public class UserServiceTest {
         Assert.assertNotNull(userCreateResponse);
         Assert.assertNotNull(userCreateResponse2);
         Assert.assertTrue(userCreateResponse.isSuccess());
-        Assert.assertTrue(userCreateResponse2.isSuccess());
+        Assert.assertFalse(userCreateResponse2.isSuccess());
         Assert.assertNotNull(userCreateResponse.getUserId());
         Assert.assertNull(userCreateResponse2.getUserId());
         Assert.assertEquals(UserServiceImpl.SUCCESS, userCreateResponse.getMessage());

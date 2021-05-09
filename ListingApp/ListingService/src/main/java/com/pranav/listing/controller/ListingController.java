@@ -42,7 +42,8 @@ public class ListingController {
 
     @GetMapping("/{listingid}")
     public GetListingResponse getByListingId(@PathVariable(required = true) Long listingid){
-        return null;
+        GetListingResponse response = service.getListById(listingid);
+        return response;
     }
 
     @GetMapping("/user/{uname}")

@@ -1,6 +1,7 @@
 package com.pranav.listing.service;
 
 import com.pranav.listing.response.CreateListingResponse;
+import com.pranav.listing.response.DeleteListingResponse;
 import com.pranav.listing.response.GetListingResponse;
 
 public interface IListingService {
@@ -11,5 +12,7 @@ public interface IListingService {
 
     GetListingResponse getAllListingByUserId(final String uname);
 
+    DeleteListingResponse deleteListing(final Long listingid, final String uname);
 
+    GetListingResponse getListById(final Long listingid);
 }

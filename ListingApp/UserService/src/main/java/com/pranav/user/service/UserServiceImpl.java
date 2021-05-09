@@ -26,6 +26,7 @@ public class UserServiceImpl implements IUserService {
         try {
             String message = null;
             String userId = null;
+            boolean isSuccess = false;
             Optional<User> userfromDb = respository.findOneByUserIdIgnoreCase(uname);
             if (userfromDb.isPresent()) {
                 message = USER_ALREADY_PRESENT;
@@ -33,10 +34,11 @@ public class UserServiceImpl implements IUserService {
                 User user = User.builder().userId(uname).build();
                 respository.save(user);
                 message = SUCCESS;
+                isSuccess = true;
                 userId = user.getUserId();
             }
             response = CreateUserResponse.builder()
-                    .isSuccess(true)
+                    .isSuccess(isSuccess)
                     .message(message)
                     .userId(userId)
                     .build();

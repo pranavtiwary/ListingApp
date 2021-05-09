@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface ListingDaoRespository extends JpaRepository<Listing, String> {
+public interface ListingDaoRespository extends JpaRepository<Listing, Long> {
     Listing findOneByIdAndUnameIgnoreCase(Long id, String uname);
 
     List<Listing> findAllByUnameIgnoreCase(String uname);

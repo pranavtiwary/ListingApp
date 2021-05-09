@@ -5,6 +5,7 @@ import com.pranav.listing.dto.ListingDTO;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ListingUtils {
@@ -33,5 +34,12 @@ public class ListingUtils {
                 .description(listing.getDescription())
                 .build();
         return dto;
+    }
+
+    public static List<ListingDTO> transformSingleModelIntoDTOs(final Listing listing) {
+        if(null == listing){
+            return null;
+        }
+        return transformModelsIntoDTOs(Arrays.asList(listing));
     }
 }

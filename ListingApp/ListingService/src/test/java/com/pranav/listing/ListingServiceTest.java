@@ -2,6 +2,7 @@ package com.pranav.listing;
 
 import com.pranav.listing.dto.ListingDTO;
 import com.pranav.listing.response.CreateListingResponse;
+import com.pranav.listing.response.DeleteListingResponse;
 import com.pranav.listing.response.GetListingResponse;
 import com.pranav.listing.service.IListingService;
 import org.junit.Assert;
@@ -11,6 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import static com.pranav.listing.service.ListingServiceImpl.DELETE_NOT_FOUND_LISTING;
+import static com.pranav.listing.service.ListingServiceImpl.DELETE_OWNER_NOT_FOUND;
+import static com.pranav.listing.service.ListingServiceImpl.NOT_FOUND_LISTING;
+import static com.pranav.listing.service.ListingServiceImpl.SUCCESS;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -27,6 +33,70 @@ public class ListingServiceTest {
         Assert.assertNotNull(response);
         Assert.assertTrue(response.isSuccess());
         Assert.assertNotNull(response.getLisitngId());
+    }
+
+
+    @Test
+    public void testGetLisitng(){
+        CreateListingResponse response = service.createListing("pranav", "mylisting 1",
+                "this is my 1st lisitng", 20d, "Electronic & Media");
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isSuccess());
+        Assert.assertNotNull(response.getLisitngId());
+
+        GetListingResponse listingResponse =
+                service.getListingByUnameAndListingId("PRAnav", response.getLisitngId());
+        Assert.assertNotNull(listingResponse);
+        Assert.assertTrue(listingResponse.isSuccess());
+        Assert.assertNotNull(listingResponse.getListings());
+        Assert.assertTrue(listingResponse.getListings().size()==1);
+        Assert.assertEquals("mylisting 1", listingResponse.getListings().get(0).getTitle());
+
+        listingResponse =
+                service.getListingByUnameAndListingId("PRAnavt", response.getLisitngId());
+        Assert.assertNotNull(listingResponse);
+        Assert.assertFalse(listingResponse.isSuccess());
+        Assert.assertNull(listingResponse.getListings());
+
+        listingResponse =
+                service.getListingByUnameAndListingId("PRAnav", 12314253534l);
+        Assert.assertNotNull(listingResponse);
+        Assert.assertFalse(listingResponse.isSuccess());
+        Assert.assertNull(listingResponse.getListings());
+        Assert.assertEquals(NOT_FOUND_LISTING,listingResponse.getMessage());
+    }
+
+
+    @Test
+    public void testDeleteLisitng(){
+        CreateListingResponse response = service.createListing("pranav", "mylisting 1",
+                "this is my 1st lisitng", 20d, "Electronic & Media");
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isSuccess());
+        Assert.assertNotNull(response.getLisitngId());
+
+        GetListingResponse listingResponse =
+                service.getListingByUnameAndListingId("PRAnav", response.getLisitngId());
+        Assert.assertNotNull(listingResponse);
+        Assert.assertTrue(listingResponse.isSuccess());
+        Assert.assertNotNull(listingResponse.getListings());
+        Assert.assertTrue(listingResponse.getListings().size()==1);
+        Assert.assertEquals("mylisting 1", listingResponse.getListings().get(0).getTitle());
+
+        DeleteListingResponse deleteListing = service.deleteListing(response.getLisitngId(), "pranavt");
+        Assert.assertNotNull(deleteListing);
+        Assert.assertFalse(deleteListing.isSuccess());
+        Assert.assertEquals(DELETE_OWNER_NOT_FOUND, deleteListing.getMessage());
+
+        deleteListing = service.deleteListing(1232423342344l, "pranav");
+        Assert.assertNotNull(deleteListing);
+        Assert.assertFalse(deleteListing.isSuccess());
+        Assert.assertEquals(DELETE_NOT_FOUND_LISTING, deleteListing.getMessage());
+
+        deleteListing = service.deleteListing(response.getLisitngId(), "pranav");
+        Assert.assertNotNull(deleteListing);
+        Assert.assertTrue(deleteListing.isSuccess());
+        Assert.assertEquals(SUCCESS, deleteListing.getMessage());
     }
 
     @Test
