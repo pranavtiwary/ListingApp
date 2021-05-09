@@ -2,6 +2,7 @@ package com.pranav.command.adapter;
 
 import com.pranav.command.response.CreateListingResponse;
 import com.pranav.command.response.CreateUserResponse;
+import com.pranav.command.response.GetListingResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -14,6 +15,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
+import java.net.URI;
 import java.util.Collections;
 
 @Component
@@ -55,6 +57,28 @@ public class ListingAdapterImpl implements  IListingAdapter{
         ResponseEntity<CreateListingResponse> httpResponse = restTemplate.postForEntity(
                 create_url, request , CreateListingResponse.class);
         CreateListingResponse response = null;
+        if(HttpStatus.OK == httpResponse.getStatusCode()){
+            System.out.println("Got 200 Response from user service");
+            response = httpResponse.getBody();
+        }else{
+            System.out.println("Got non-200 Response from user service");
+        }
+        return response;
+    }
+
+    public GetListingResponse getListingByUserIdAndListingId(final String uname,
+                                                             final String listingid){
+        System.out.println("Calling Listing service to Create listing");
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        StringBuilder sb = new StringBuilder(list_by_userid_lisitngid_url);
+        sb.append("?");
+        sb.append("uname="+uname);
+        sb.append("listingid="+listingid);
+        URI uri = URI.create(sb.toString());
+        ResponseEntity<GetListingResponse> httpResponse = restTemplate.getForEntity(
+                uri , GetListingResponse.class);
+        GetListingResponse response = null;
         if(HttpStatus.OK == httpResponse.getStatusCode()){
             System.out.println("Got 200 Response from user service");
             response = httpResponse.getBody();

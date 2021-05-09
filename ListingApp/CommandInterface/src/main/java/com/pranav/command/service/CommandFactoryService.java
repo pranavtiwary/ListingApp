@@ -38,7 +38,7 @@ public class CommandFactoryService {
         }
         ICommand command = null;
         List<String> list = new ArrayList<String>();
-        Matcher m = Pattern.compile("([^\"]\\S*|\".+?\")\\s*").matcher(input);
+        Matcher m = Pattern.compile("([^\']\\S*|\'.+?\')\\s*").matcher(input);
         while (m.find()){
             list.add(m.group(1).replace("'", ""));
         }

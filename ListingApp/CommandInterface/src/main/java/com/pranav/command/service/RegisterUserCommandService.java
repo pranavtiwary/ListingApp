@@ -1,7 +1,6 @@
 package com.pranav.command.service;
 
 import com.pranav.command.adapter.IUserAdapter;
-import com.pranav.command.adapter.UserAdapterImpl;
 import com.pranav.command.response.CreateUserResponse;
 import com.pranav.command.type.ICommand;
 import com.pranav.command.type.RegisterUserCmd;

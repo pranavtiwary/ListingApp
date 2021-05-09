@@ -2,6 +2,7 @@ package com.pranav.command.service;
 
 import com.pranav.command.adapter.IListingAdapter;
 import com.pranav.command.adapter.IUserAdapter;
+import com.pranav.command.response.CreateListingResponse;
 import com.pranav.command.response.GetUserResponse;
 import com.pranav.command.type.CreateListingCmd;
 import com.pranav.command.type.ICommand;
@@ -19,19 +20,24 @@ public class CreateListingCommandService implements ICommandService {
     private IUserAdapter userAdapter;
 
     public void execute(ICommand command){
-        if(!(command instanceof RegisterUserCmd)){
-            System.out.println("Register Command Service can only execute on RegisterUserCmd");
+        if(!(command instanceof CreateListingCmd)){
+            System.out.println("Create listing Command Service can only execute on RegisterUserCmd");
         }
         try {
             CreateListingCmd createLstCmd = (CreateListingCmd) command;
             GetUserResponse userCheck = userAdapter.getUser(createLstCmd.getUserName());
             if (null != userCheck && null != userCheck.getData()) {
-                listingAdapter.createListing(
+                CreateListingResponse response = listingAdapter.createListing(
                         createLstCmd.getUserName(),
                         createLstCmd.getTitle(),
                         createLstCmd.getDescription(),
                         createLstCmd.getPrice(),
                         createLstCmd.getCategory());
+                if(response.getIsSuccess()){
+                    System.out.println(response.getLisitngId());
+                }else {
+                    System.out.println(response.getMessage());
+                }
             } else {
                 System.out.println("User does not exists");
             }

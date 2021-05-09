@@ -13,6 +13,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @SpringBootTest
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -20,6 +25,19 @@ public class CommandFactoryTest {
 
     @Autowired
     private CommandFactoryService factory ;
+
+    @Test
+    public void tetsRegex(){
+
+        List<String> list = new ArrayList<String>();
+        String input="CREATE_LISTING user1 'Black shoes' 'Training shoes' 100 'Sports'";
+        //"([^\"]\\S*|\".+?\")\\s*"
+        Matcher m = Pattern.compile("([^\']\\S*|\'.+?\')\\s*").matcher(input);
+        while (m.find()){
+            list.add(m.group(1).replace("'", ""));
+        }
+        Assert.assertTrue(list.size()==6);
+    }
 
     @Test
     public void testRegisterCommand_Success(){
