@@ -4,6 +4,8 @@ import com.pranav.command.error.CommandNotValidException;
 import com.pranav.command.service.ICommandService;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * Create Listing Command
  */
@@ -16,20 +18,20 @@ public class CreateListingCmd extends AbstractCommand{
     private String userName;
     private String title;
     private String description;
-    private String price;
+    private Double price;
     private String category;
 
 
-    public CreateListingCmd(String[] commandArray, ICommandService service) {
+    public CreateListingCmd(final List<String> commandArray, ICommandService service) {
         super(service);
         if(!isValid(commandArray)){
             throw new CommandNotValidException();
         }
-        this.userName = commandArray[1];
-        this.title = commandArray[2];
-        this.description = commandArray[3];
-        this.price = commandArray[4];
-        this.category = commandArray[5];
+        this.userName = commandArray.get(1);
+        this.title = commandArray.get(2);
+        this.description = commandArray.get(3);
+        this.price =new Double(commandArray.get(4));
+        this.category = commandArray.get(5);
     }
 
     @Override

@@ -4,6 +4,8 @@ import com.pranav.command.error.CommandNotValidException;
 import com.pranav.command.service.ICommandService;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * RegisterUserCmd
  */
@@ -15,12 +17,12 @@ public class RegisterUserCmd extends AbstractCommand{
 
     private String userName;
 
-    public RegisterUserCmd(String[] commandArray, ICommandService service) {
+    public RegisterUserCmd(final List<String> commandArray, ICommandService service) {
         super(service);
         if(!isValid(commandArray)){
             throw new CommandNotValidException();
         }
-        this.userName = commandArray[1];
+        this.userName = commandArray.get(1);
     }
 
     @Override
