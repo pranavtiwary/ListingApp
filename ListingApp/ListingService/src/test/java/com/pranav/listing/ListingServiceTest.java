@@ -80,4 +80,40 @@ public class ListingServiceTest {
         Assert.assertTrue(listingDTO2.getId().longValue()==response.getLisitngId().longValue());
         Assert.assertEquals("Electronic & Media", listingDTO2.getCategory());
     }
+
+    @Test
+    public void testGetListing(){
+        CreateListingResponse response = service.createListing("pranavT", "mylisting 1",
+                "this is my 1st lisitng", 20d, "Electronic & Media");
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isSuccess());
+        Assert.assertNotNull(response.getLisitngId());
+
+        CreateListingResponse response2 = service.createListing("pranavt", "mylisting 2",
+                "this is my 2nd lisitng", 20d, "Mobile");
+        Assert.assertNotNull(response2);
+        Assert.assertTrue(response2.isSuccess());
+        Assert.assertNotNull(response2.getLisitngId());
+
+        Assert.assertTrue(response.getLisitngId().longValue() != response2.getLisitngId().longValue());
+
+        GetListingResponse listingResponseWithUpparCase = service.getAllListingByUserId("PRANAVT");
+
+        Assert.assertNotNull(listingResponseWithUpparCase);
+        Assert.assertTrue(listingResponseWithUpparCase.isSuccess());
+        Assert.assertNotNull(listingResponseWithUpparCase.getListings());
+        Assert.assertTrue(listingResponseWithUpparCase.getListings().size()==2);
+
+        ListingDTO listingDTO1 = listingResponseWithUpparCase.getListings().get(0);
+        Assert.assertNotNull(listingDTO1);
+        Assert.assertTrue(listingDTO1.getId().longValue()==response.getLisitngId().longValue());
+        Assert.assertEquals("Electronic & Media", listingDTO1.getCategory());
+        Assert.assertEquals("mylisting 1", listingDTO1.getTitle());
+
+        ListingDTO listingDTO2 = listingResponseWithUpparCase.getListings().get(1);
+        Assert.assertNotNull(listingDTO2);
+        Assert.assertTrue(listingDTO2.getId().longValue()==response2.getLisitngId().longValue());
+        Assert.assertEquals("Mobile", listingDTO2.getCategory());
+        Assert.assertEquals("mylisting 2", listingDTO2.getTitle());
+    }
 }
