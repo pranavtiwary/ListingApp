@@ -17,13 +17,19 @@ public class RegisterUserCommandService implements ICommandService {
     public void execute(ICommand command){
         if(!(command instanceof RegisterUserCmd)){
             System.out.println("Register Command Service can only execute on RegisterUserCmd");
+            return;
         }
-        RegisterUserCmd usrCmd = (RegisterUserCmd)command;
-        CreateUserResponse userResponse = adpater.registerUser(usrCmd.getUserName());
-        if(null == userResponse){
-            System.out.println("Error : Not able to execute command");
-        }else{
-            System.out.println(userResponse.getMessage());
+        try {
+            RegisterUserCmd usrCmd = (RegisterUserCmd) command;
+            CreateUserResponse userResponse = adpater.registerUser(usrCmd.getUserName());
+            if (null == userResponse) {
+                System.out.println("Error : Not able to execute command");
+            } else {
+                System.out.println(userResponse.getMessage());
+            }
+        }catch (Exception ex){
+            System.out.println("Error in executing command");
+            ex.printStackTrace();
         }
     }
 }

@@ -15,6 +15,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
+import java.util.Collections;
 
 @Component
 public class UserAdapterImpl implements  IUserAdapter{
@@ -32,6 +33,7 @@ public class UserAdapterImpl implements  IUserAdapter{
         System.out.println("Calling user service to Register user : "+ username);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         MultiValueMap<String, String> map= new LinkedMultiValueMap<>();
         map.add("uname", username);
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
