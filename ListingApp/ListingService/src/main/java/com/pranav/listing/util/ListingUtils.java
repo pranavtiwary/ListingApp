@@ -29,6 +29,7 @@ public class ListingUtils {
                 .title(listing.getTitle())
                 .price(listing.getPrice())
                 .uname(listing.getUname())
+                .category(listing.getCategory())
                 .description(listing.getDescription())
                 .build();
         return dto;

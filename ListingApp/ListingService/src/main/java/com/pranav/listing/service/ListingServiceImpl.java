@@ -57,7 +57,7 @@ public class ListingServiceImpl implements  IListingService{
         System.out.println("Inside getListingByUnameAndListingId service");
         GetListingResponse  response = null;
         try {
-            Listing listing =  repository.findOneByIdAndUname(listingId, uname);
+            Listing listing =  repository.findOneByIdAndUnameIgnoreCase(listingId, uname);
             response = GetListingResponse.builder()
                     .isSuccess(true)
                     .message(SUCCESS)
@@ -79,7 +79,7 @@ public class ListingServiceImpl implements  IListingService{
         System.out.println("Inside getAllListingByUserId service");
         GetListingResponse  response = null;
         try {
-            List<Listing> listings = repository.findAllByUname(uname);
+            List<Listing> listings = repository.findAllByUnameIgnoreCase(uname);
             response = GetListingResponse.builder()
                     .isSuccess(true)
                     .message(SUCCESS)
