@@ -1,6 +1,6 @@
 package com.pranav.user.response;
 
-import com.pranav.user.model.UserData;
+import com.pranav.user.dto.UserDataDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
@@ -9,5 +9,5 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 public class GetUserResponse extends Response{
-    private UserData data;
+    private UserDataDTO data;
 }

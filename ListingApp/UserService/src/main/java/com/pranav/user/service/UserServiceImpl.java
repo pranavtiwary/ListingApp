@@ -2,7 +2,7 @@ package com.pranav.user.service;
 
 import com.pranav.user.dao.UserDaoRespository;
 import com.pranav.user.dao.model.User;
-import com.pranav.user.model.UserData;
+import com.pranav.user.dto.UserDataDTO;
 import com.pranav.user.response.CreateUserResponse;
 import com.pranav.user.response.GetUserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,10 +58,10 @@ public class UserServiceImpl implements IUserService {
         try{
             String message = null;
             Optional<User> user = respository.findById(uname);
-            UserData data = null;
+            UserDataDTO data = null;
             if(user.isPresent()){
                 message = "User is available";
-                data =UserData.builder().userId(user.get().getUserId()).build();
+                data = UserDataDTO.builder().userId(user.get().getUserId()).build();
             }else{
                 message = "User is not available";
             }

@@ -1,4 +1,4 @@
-package com.pranav.user.model;
+package com.pranav.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserData {
+public class UserDataDTO {
     private String userId;
 }
