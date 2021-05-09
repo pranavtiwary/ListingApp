@@ -5,11 +5,11 @@ import com.pranav.command.service.CommandFactoryService;
 import com.pranav.command.type.ICommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class CommandLineAppStartupRunner implements CommandLineRunner {
 
     @Autowired
