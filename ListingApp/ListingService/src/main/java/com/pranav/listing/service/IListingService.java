@@ -5,8 +5,11 @@ import com.pranav.listing.response.DeleteListingResponse;
 import com.pranav.listing.response.GetListingResponse;
 
 public interface IListingService {
-    CreateListingResponse createListing(String uname, final String title,
-                                        String description, Double price, String category);
+    CreateListingResponse createListing(final String uname,
+                                        final String title,
+                                        final String description,
+                                        final Double price,
+                                        final String category);
 
     GetListingResponse getListingByUnameAndListingId(final String uname, final Long listingId);
 

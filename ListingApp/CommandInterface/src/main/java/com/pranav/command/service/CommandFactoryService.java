@@ -19,8 +19,12 @@ import java.util.Objects;
 public class CommandFactoryService {
 
     @Autowired
-    @Qualifier("RegisterCommandService")
-    private ICommandService registerCommandService;
+    @Qualifier("RegisterUserCommandService")
+    private ICommandService registerUserCommandService;
+
+    @Autowired
+    @Qualifier("CreateListingCommandService")
+    private ICommandService createListingCommandService;
 
 
     public ICommand createCommand(String input) {
@@ -32,7 +36,7 @@ public class CommandFactoryService {
         String commandName = commandArray[0];
         switch (commandName){
             case RegisterUserCmd.COMMAND_NAME:
-                command = new RegisterUserCmd(commandArray, registerCommandService);
+                command = new RegisterUserCmd(commandArray, registerUserCommandService);
                 break;
             case "":
                 command = null;
