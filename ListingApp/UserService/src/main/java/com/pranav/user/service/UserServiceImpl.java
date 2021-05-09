@@ -13,8 +13,8 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements IUserService {
 
-    private static final String USER_ALREADY_PRESENT="Error - user already existing";
-    private static final String SUCCESS="Success";
+    public static final String USER_ALREADY_PRESENT="Error - user already existing";
+    public static final String SUCCESS="Success";
 
     @Autowired
     private UserDaoRespository respository;
@@ -26,7 +26,7 @@ public class UserServiceImpl implements IUserService {
         try {
             String message = null;
             String userId = null;
-            Optional<User> userfromDb = respository.findById(uname);
+            Optional<User> userfromDb = respository.findOneByUserIdIgnoreCase(uname);
             if (userfromDb.isPresent()) {
                 message = USER_ALREADY_PRESENT;
             } else {
@@ -57,7 +57,7 @@ public class UserServiceImpl implements IUserService {
         GetUserResponse  response = null;
         try{
             String message = null;
-            Optional<User> user = respository.findById(uname);
+            Optional<User> user = respository.findOneByUserIdIgnoreCase(uname);
             UserDataDTO data = null;
             if(user.isPresent()){
                 message = "User is available";
