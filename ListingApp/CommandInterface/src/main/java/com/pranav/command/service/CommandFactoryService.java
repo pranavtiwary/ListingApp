@@ -3,6 +3,7 @@ package com.pranav.command.service;
 
 import com.pranav.command.error.CommandNotValidException;
 import com.pranav.command.type.CreateListingCmd;
+import com.pranav.command.type.GetListingCmd;
 import com.pranav.command.type.ICommand;
 import com.pranav.command.type.RegisterUserCmd;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,10 @@ public class CommandFactoryService {
     @Qualifier("CreateListingCommandService")
     private ICommandService createListingCommandService;
 
+    @Autowired
+    @Qualifier("GetListingCommandService")
+    private ICommandService getListingCommandService;
+
 
     public ICommand createCommand(String input) {
         if(!StringUtils.hasLength(input)){
@@ -50,6 +55,9 @@ public class CommandFactoryService {
                 break;
             case CreateListingCmd.COMMAND_NAME:
                 command = new CreateListingCmd(list, createListingCommandService);
+                break;
+            case GetListingCmd.COMMAND_NAME:
+                command = new GetListingCmd(list, getListingCommandService);
                 break;
         }
         if(Objects.isNull(command)){
