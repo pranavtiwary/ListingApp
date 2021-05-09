@@ -5,7 +5,6 @@ import com.pranav.command.response.CreateUserResponse;
 import com.pranav.command.response.GetUserResponse;
 import com.pranav.command.service.CommandFactoryService;
 import com.pranav.command.service.ICommandService;
-import com.pranav.command.service.RegisterUserCommandService;
 import com.pranav.command.type.RegisterUserCmd;
 import org.junit.Before;
 import org.junit.Test;

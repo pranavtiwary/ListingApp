@@ -46,7 +46,7 @@ public class RegisterUserCmdTest {
     @Test(expected = CommandNotValidException.class)
     public void testRegisterCommand_FAILURE_NULL(){
         String str[] = null;
-        RegisterUserCmd cmd = new RegisterUserCmd(Arrays.asList(str), registerCommandService);
+        RegisterUserCmd cmd = new RegisterUserCmd(null, registerCommandService);
     }
 
     @Test(expected = CommandNotValidException.class)
