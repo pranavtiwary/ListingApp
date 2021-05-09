@@ -1,8 +1,11 @@
 package com.pranav.listing.controller;
 
 import com.pranav.listing.response.CreateListingResponse;
+import com.pranav.listing.response.GetListingResponse;
 import com.pranav.listing.service.IListingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,5 +28,27 @@ public class ListingController {
         System.out.println("Received a request to create a listing");
         CreateListingResponse response = service.createListing(uname, title, description, price, category);
         return response;
+    }
+
+    @GetMapping("/getlisting-by-userid-listingid")
+    public GetListingResponse getListingByUserIdAndListingId(
+            @RequestParam(required = true) String uname,
+            @RequestParam(required = true) Long listingid){
+        System.out.println("Received a request to Get a listing for userId : " +
+                "" + uname + " and lisitng id : " + listingid);
+        GetListingResponse listings = service.getListingByUnameAndListingId(uname, listingid);
+        return listings;
+    }
+
+    @GetMapping("/{listingid}")
+    public GetListingResponse getByListingId(@PathVariable(required = true) Long listingid){
+        return null;
+    }
+
+    @GetMapping("/user/{uname}")
+    public GetListingResponse getAllListingByUserId(@PathVariable(required = true) String uname){
+        System.out.println("Received a request to get all listings for userid : " + uname);
+        GetListingResponse listingByUserId = service.getAllListingByUserId(uname);
+        return listingByUserId;
     }
 }

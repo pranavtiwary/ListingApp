@@ -28,28 +28,26 @@ public class ListingServiceImpl implements  IListingService{
                                                final String description,
                                                final Double price,
                                                final String category) {
-        {
-            System.out.println("Inside create lisitng service");
-            CreateListingResponse  response = null;
-            try {
-                Listing listing = Listing.builder().title(title)
-                        .uname(uname).category(category).description(description).price(price).build();
-                repository.save(listing);
-                response = CreateListingResponse.builder()
-                        .isSuccess(true)
-                        .message(SUCCESS)
-                        .lisitngId(listing.getId())
-                        .build();
-            }catch (Exception ex){
-                System.out.println("Error in creating Listing");
-                ex.printStackTrace();
-                response = CreateListingResponse.builder()
-                        .isSuccess(false)
-                        .message(FAILURE)
-                        .build();
-            }
-            return response;
+        System.out.println("Inside create lisitng service");
+        CreateListingResponse  response = null;
+        try {
+            Listing listing = Listing.builder().title(title)
+                    .uname(uname).category(category).description(description).price(price).build();
+            repository.save(listing);
+            response = CreateListingResponse.builder()
+                    .isSuccess(true)
+                    .message(SUCCESS)
+                    .lisitngId(listing.getId())
+                    .build();
+        }catch (Exception ex){
+            System.out.println("Error in creating Listing");
+            ex.printStackTrace();
+            response = CreateListingResponse.builder()
+                    .isSuccess(false)
+                    .message(FAILURE)
+                    .build();
         }
+        return response;
     }
 
     @Override
