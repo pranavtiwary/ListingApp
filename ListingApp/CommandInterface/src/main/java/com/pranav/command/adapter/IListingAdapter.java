@@ -3,6 +3,7 @@ package com.pranav.command.adapter;
 import com.pranav.command.response.CreateListingResponse;
 import com.pranav.command.response.DeleteListingResponse;
 import com.pranav.command.response.GetListingResponse;
+import com.pranav.command.response.GetTopCategoryResponse;
 
 public interface IListingAdapter {
 
@@ -23,5 +24,5 @@ public interface IListingAdapter {
                                             final String sortby,
                                             final String order);
 
-    GetListingResponse getListingByTopCategoryByUser(final String userName);
+    GetTopCategoryResponse getListingByTopCategoryByUser(final String userName);
 }

@@ -4,6 +4,7 @@ import com.pranav.command.response.CreateListingResponse;
 import com.pranav.command.response.CreateUserResponse;
 import com.pranav.command.response.DeleteListingResponse;
 import com.pranav.command.response.GetListingResponse;
+import com.pranav.command.response.GetTopCategoryResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -84,6 +85,7 @@ public class ListingAdapterImpl implements  IListingAdapter{
         StringBuilder sb = new StringBuilder(list_by_userid_lisitngid_url);
         sb.append("?");
         sb.append("uname="+uname);
+        sb.append("&");
         sb.append("listingid="+listingid);
         URI uri = URI.create(sb.toString());
         ResponseEntity<GetListingResponse> httpResponse = restTemplate.getForEntity(
@@ -107,6 +109,7 @@ public class ListingAdapterImpl implements  IListingAdapter{
         StringBuilder sb = new StringBuilder(list_by_userid_lisitngid_url);
         sb.append("?");
         sb.append("uname="+uname);
+        sb.append("&");
         sb.append("listingid="+listingid);
         URI uri = URI.create(sb.toString());
         ResponseEntity<DeleteListingResponse> httpResponse = restTemplate.getForEntity(
@@ -129,8 +132,11 @@ public class ListingAdapterImpl implements  IListingAdapter{
         StringBuilder sb = new StringBuilder(list_by_category_url);
         sb.append("?");
         sb.append("uname="+userName);
+        sb.append("&");
         sb.append("category="+category);
+        sb.append("&");
         sb.append("sortby="+sortby);
+        sb.append("&");
         sb.append("order="+order);
         URI uri = URI.create(sb.toString());
         ResponseEntity<GetListingResponse> httpResponse = restTemplate.getForEntity(
@@ -146,7 +152,7 @@ public class ListingAdapterImpl implements  IListingAdapter{
     }
 
     @Override
-    public GetListingResponse getListingByTopCategoryByUser(final String userName) {
+    public GetTopCategoryResponse getListingByTopCategoryByUser(final String userName) {
         System.out.println("Calling Listing service to Get listing by top category for an user");
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
@@ -154,9 +160,9 @@ public class ListingAdapterImpl implements  IListingAdapter{
         sb.append("?");
         sb.append("uname="+userName);
         URI uri = URI.create(sb.toString());
-        ResponseEntity<GetListingResponse> httpResponse = restTemplate.getForEntity(
-                uri , GetListingResponse.class);
-        GetListingResponse response = null;
+        ResponseEntity<GetTopCategoryResponse> httpResponse = restTemplate.getForEntity(
+                uri , GetTopCategoryResponse.class);
+        GetTopCategoryResponse response = null;
         if(HttpStatus.OK == httpResponse.getStatusCode()){
             System.out.println("Got 200 Response from Listing service");
             response = httpResponse.getBody();

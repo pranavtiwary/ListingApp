@@ -13,27 +13,20 @@ public interface ListingDaoRespository extends JpaRepository<Listing, Long> {
 
     List<Listing> findAllByUnameIgnoreCase(String uname);
 
-    List<Listing> findByUnameIgnoreCaseAndCategoryIgnoreCaseOrderByCreatedOnAsc(String uname, String category);
-    List<Listing> findByUnameIgnoreCaseAndCategoryIgnoreCaseOrderByCreatedOnDesc(String uname, String category);
-    List<Listing> findByUnameIgnoreCaseAndCategoryIgnoreCaseOrderByPriceAsc(String uname, String category);
-    List<Listing> findByUnameIgnoreCaseAndCategoryIgnoreCaseOrderByPriceDesc(String uname, String category);
+    List<Listing> findByCategoryIgnoreCaseOrderByCreatedOnAsc(String category);
+    List<Listing> findByCategoryIgnoreCaseOrderByCreatedOnDesc(String category);
+    List<Listing> findByCategoryIgnoreCaseOrderByPriceAsc(String category);
+    List<Listing> findByCategoryIgnoreCaseOrderByPriceDesc(String category);
 
-    @Query(value = "SELECT e FROM Listing e WHERE lower(e.uname) = lower(:uname) " +
-            "and lower(e.category) = lower(:category) " +
+    @Query(value = "SELECT e FROM Listing e WHERE " +
+            "lower(e.category) = lower(:category) " +
             "ORDER BY e.createdOn DESC",
             nativeQuery = false)
-    List<Listing> findByCategorySortTimeDesc_NQ(@Param("uname") String uname,
-                                                @Param("category") String category);
+    List<Listing> findByCategorySortTimeDesc_NQ(@Param("category") String category);
 
-    @Query(value = "SELECT e FROM Listing e WHERE lower(e.uname) = lower(:uname) " +
-            "and lower(e.category) = lower(:category) " +
+    @Query(value = "SELECT e FROM Listing e WHERE " +
+            "lower(e.category) = lower(:category) " +
             "ORDER BY e.createdOn ASC",
             nativeQuery = false)
-    List<Listing> findByCategorySortTimeAsc_NQ(@Param("uname") String uname,
-                                               @Param("category") String category);
-    @Query(value = "SELECT e.category FROM Listing e WHERE lower(e.uname) = lower(:uname) " +
-            "and lower(e.category) = lower(:category) " +
-            "ORDER BY e.createdOn ASC",
-            nativeQuery = false)
-    String getTopCategory();
+    List<Listing> findByCategorySortTimeAsc_NQ(@Param("category") String category);
 }

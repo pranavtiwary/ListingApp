@@ -15,5 +15,5 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Response implements Serializable {
     private String message;
-    private Boolean isSuccess;
+    private boolean isSuccess;
 }

@@ -37,7 +37,7 @@ public class ListingServiceImpl implements  IListingService{
                                                final String description,
                                                final Double price,
                                                final String category) {
-        System.out.println("Inside create lisitng service");
+        System.out.println("Inside create listing service");
         CreateListingResponse  response = null;
         try {
             Listing listing = Listing.builder().title(title)
@@ -66,12 +66,13 @@ public class ListingServiceImpl implements  IListingService{
         GetListingResponse  response = null;
         try {
             String message = null;
-            Listing listing =  repository.findOneByIdAndUnameIgnoreCase(listingId, uname);
-            List<ListingDTO> dtos = transformSingleModelIntoDTOs(listing);
-            if(CollectionUtils.isEmpty(dtos)){
-                message = NOT_FOUND_LISTING;
-            }else {
+            Optional<Listing> listing =  repository.findById(listingId);
+            List<ListingDTO> dtos = null;
+            if(listing.isPresent()){
+                dtos = transformSingleModelIntoDTOs(listing.get());
                 message = SUCCESS;
+            }else {
+                message = NOT_FOUND_LISTING;
             }
             response = GetListingResponse.builder()
                     .isSuccess(true)
@@ -153,16 +154,16 @@ public class ListingServiceImpl implements  IListingService{
             List<Listing> listings = null;
             if(sortby.equalsIgnoreCase("SORT_PRICE")
                     && order.equalsIgnoreCase("DSC")){
-                listings =  repository.findByUnameIgnoreCaseAndCategoryIgnoreCaseOrderByPriceDesc(uname, category);
+                listings =  repository.findByCategoryIgnoreCaseOrderByPriceDesc(category);
             } else  if(sortby.equalsIgnoreCase("SORT_PRICE")
                     && order.equalsIgnoreCase("ASC")){
-                listings =  repository.findByUnameIgnoreCaseAndCategoryIgnoreCaseOrderByPriceAsc(uname, category);
+                listings =  repository.findByCategoryIgnoreCaseOrderByPriceAsc(category);
             } else  if(sortby.equalsIgnoreCase("SORT_TIME")
                     && order.equalsIgnoreCase("DSC")){
-                listings =  repository.findByCategorySortTimeDesc_NQ(uname, category);
+                listings =  repository.findByCategorySortTimeDesc_NQ(category);
             } else if(sortby.equalsIgnoreCase("SORT_TIME")
                     && order.equalsIgnoreCase("ASC")){
-                listings =  repository.findByCategorySortTimeAsc_NQ(uname, category);
+                listings =  repository.findByCategorySortTimeAsc_NQ(category);
             }
             List<ListingDTO> dtos = transformModelsIntoDTOs(listings);
             if(CollectionUtils.isEmpty(dtos)){

@@ -33,7 +33,7 @@ public class GetListingCommandService implements ICommandService {
                 GetListingResponse response =
                         listingAdapter.getListingByUserIdAndListingId(
                                 cmd.getUserName(), cmd.getListingid());
-                if(response.getIsSuccess()){
+                if(response.isSuccess() && null!=response.getListings()){
                     for(ListingDTO dto : response.getListings()){
                         StringBuilder sb = new StringBuilder();
                         sb.append(dto.getTitle());

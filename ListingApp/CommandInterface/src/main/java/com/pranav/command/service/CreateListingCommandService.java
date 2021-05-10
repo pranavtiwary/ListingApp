@@ -33,7 +33,7 @@ public class CreateListingCommandService implements ICommandService {
                         createLstCmd.getDescription(),
                         createLstCmd.getPrice(),
                         createLstCmd.getCategory());
-                if(response.getIsSuccess()){
+                if(response.isSuccess()){
                     System.out.println(response.getLisitngId());
                 }else {
                     System.out.println(response.getMessage());

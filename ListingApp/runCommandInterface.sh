@@ -1,0 +1,1 @@
+java -jar ./CommandInterface/target/commandinterface-0.0.1-SNAPSHOT.jar

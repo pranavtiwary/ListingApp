@@ -3,6 +3,7 @@ package com.pranav.command.service;
 import com.pranav.command.adapter.IListingAdapter;
 import com.pranav.command.adapter.IUserAdapter;
 import com.pranav.command.response.GetListingResponse;
+import com.pranav.command.response.GetTopCategoryResponse;
 import com.pranav.command.response.GetUserResponse;
 import com.pranav.command.response.ListingDTO;
 import com.pranav.command.type.GetCategoryListingCmd;
@@ -13,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("GetTopCategoryListingCmdService")
-public class GetTopCategoryListingCmdService implements ICommandService {
+public class GetTopCategoryCmdService implements ICommandService {
 
     @Autowired
     private IListingAdapter listingAdapter;
@@ -29,25 +30,11 @@ public class GetTopCategoryListingCmdService implements ICommandService {
             GetTopCategoryListingCmd cmd = (GetTopCategoryListingCmd) command;
             GetUserResponse userCheck = userAdapter.getUser(cmd.getUserName());
             if (null != userCheck && null != userCheck.getData()) {
-                GetListingResponse response =
+                GetTopCategoryResponse response =
                         listingAdapter.getListingByTopCategoryByUser(
                                 cmd.getUserName());
-                if(response.getIsSuccess()){
-                    for(ListingDTO dto : response.getListings()){
-                        StringBuilder sb = new StringBuilder();
-                        sb.append(dto.getTitle());
-                        sb.append("|");
-                        sb.append(dto.getDescription());
-                        sb.append("|");
-                        sb.append(dto.getPrice());
-                        sb.append("|");
-                        sb.append(dto.getCreatedOn());
-                        sb.append("|");
-                        sb.append(dto.getCategory());
-                        sb.append("|");
-                        sb.append(dto.getUname());
-                        System.out.println(sb.toString());
-                    }
+                if(response.isSuccess()){
+                    System.out.println(response.getCategory());
                 }else {
                     System.out.println(response.getMessage());
                 }

@@ -6,28 +6,38 @@ Software Required :
 
 Internal Module
 
-1. CommandInterface : Spring boot applicaiton, provides command interface to communicate to user and listing service.
+1. CommandInterface : Spring boot application, provides command interface to communicate to user and listing service.
+    ->Dependencies : JDK 8, Maven 3.6.3, Spring boot 2.4.5
 
-Dependencies : JDK 8, Maven 3.6.3, Spring boot 2.4.5
+2. UserService : Spring boot web and security application. Hold user authentication information
+    ->Dependencies : JDK 8, Maven 3.6.3, Spring boot 2.4.5, Spring security, Spring data and In memmory H2 DB.
 
-2. UserService : Spring boot web and security applicaiton. Hold user authentication information
-Dependencies : JDK 8, Maven 3.6.3, Spring boot 2.4.5, Spring security, Spring data and In memmory H2 DB.
-
-
-3. CommandInterface : Spring boot web applicaiton, holds listing service.
-
-Dependencies : JDK 8, Maven 3.6.3, Spring boot 2.4.5, Spring Web, Spring data and In memmory H2 DB.
+3. CommandInterface : Spring boot web application, holds listing service.
+    ->Dependencies : JDK 8, Maven 3.6.3, Spring boot 2.4.5, Spring Web, Spring data and In memmory H2 DB.
 
 
-Compilation :
-1. Open a new terminal and go to project root directory
-2. Run command "mvn clean install"
+Run Book :
+    1. Open a new terminal and go to project root directory 
+        eg : cd /Volumes/HD2/Research/ListingApp
+        (you may need to change mod "chmod 777 *.sh")
+        Run command "./compile.sh"
+        Description: Its runs "mvn clean install" and build/test/create jar file for all our modules
+        Output : You should see "BUILD SUCCESS" in the terminal
+    2. Open a new terminal and go to project root directory and Run command
+        Run command "./runUserService.sh"
+        Description: Its runs the User Service and Start a server at 8081 port
+        check if this user service is on "http://localhost:8081/actuator" 
+        and also check h2 db at "http://localhost:8081/h2-console"
+    3. Open a new terminal and go to project root directory and Run command
+        Run command "./runListingService.sh"
+        Description: Its runs the Listing Service and Start a server at 8085 port
+        check if this user service is on "http://localhost:8085/actuator"
+        and also check h2 db at "http://localhost:8085/h2-console"   
+    4. Open a new terminal and go to project root directory and Run command
+        Run command "./runCommandInterface.sh"
+        Description: Its runs the Command Interface Service and Start a server at 8085 port
+        This is where we enter command line input.
 
-How to start application?
-
-1. Run User Server : Open a new terminal and run command (Must have 8081 port free, its tomcat server)
-2. Run Listing Server : open a new terminal and run command (Must have 8082 port free, its tomcat server)
-3. Run Command Inteface : Open a new terminal and run command (Its Normal jar application)
 
 How to interact?
 1. Go to terminal where you have opened command interface
@@ -39,4 +49,4 @@ How to Shutdown?
 # Running H2 Database Admin : 
 
 http://localhost:8081/h2-console for user : Verify user CRUD here
-http://localhost:8082/h2-console for Listing : Verify listing CRUD here
+http://localhost:8085/h2-console for Listing : Verify listing CRUD here

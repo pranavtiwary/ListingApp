@@ -31,7 +31,7 @@ public class GetCategoryListingCmdService implements ICommandService {
                 GetListingResponse response =
                         listingAdapter.getListingByCategory(
                                 cmd.getUserName(), cmd.getCategory(), cmd.getSortby(), cmd.getOrder());
-                if(response.getIsSuccess()){
+                if(response.isSuccess() && null!=response.getListings()){
                     for(ListingDTO dto : response.getListings()){
                         StringBuilder sb = new StringBuilder();
                         sb.append(dto.getTitle());
