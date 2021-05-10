@@ -104,7 +104,7 @@ public class ListingAdapterImpl implements  IListingAdapter{
         //System.out.println("Calling Listing service to Delete listing");
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        StringBuilder sb = new StringBuilder(list_by_userid_lisitngid_url);
+        StringBuilder sb = new StringBuilder(delete_listing_byuseruid_bylisitngid_url);
         sb.append("?");
         sb.append("uname="+uname);
         sb.append("&");

@@ -27,7 +27,7 @@ public class ListingController {
             @RequestParam(required = true) String description,
             @RequestParam(required = true) Double price,
             @RequestParam(required = true) String category){
-        System.out.println("Received a request to create a listing");
+        System.out.println("create: Received a request to create a listing");
         CreateListingResponse response = service.createListing(uname, title, description, price, category);
         return response;
     }
@@ -36,7 +36,7 @@ public class ListingController {
     public GetListingResponse getListingByUserIdAndListingId(
             @RequestParam(required = true) String uname,
             @RequestParam(required = true) Long listingid){
-        System.out.println("Received a request to Get a listing for userId : " +
+        System.out.println("getListingByUserIdAndListingId: Received a request to Get a listing for userId : " +
                 "" + uname + " and lisitng id : " + listingid);
         GetListingResponse listings = service.getListingByUnameAndListingId(uname, listingid);
         return listings;
@@ -44,13 +44,14 @@ public class ListingController {
 
     @GetMapping("/{listingid}")
     public GetListingResponse getByListingId(@PathVariable(required = true) Long listingid){
+        System.out.println("getByListingId : Received a request to get a listing : " +listingid);
         GetListingResponse response = service.getListById(listingid);
         return response;
     }
 
     @GetMapping("/user/{uname}")
     public GetListingResponse getAllListingByUserId(@PathVariable(required = true) String uname){
-        System.out.println("Received a request to get all listings for userid : " + uname);
+        System.out.println("getAllListingByUserId : Received a request to get all listings for userid : " + uname);
         GetListingResponse listingByUserId = service.getAllListingByUserId(uname);
         return listingByUserId;
     }
@@ -59,7 +60,8 @@ public class ListingController {
     public DeleteListingResponse deleteListingByUserIdAndListingId(
             @RequestParam(required = true) String uname,
             @RequestParam(required = true) Long listingid){
-        System.out.println("Received a request to get all listings for userid : " + uname);
+        System.out.println("deleteListingByUserIdAndListingId : Received a request to " +
+                "delete listings for : userid=" + uname + " & listingid="+listingid);
         DeleteListingResponse res = service.deleteListing(listingid, uname);
         return res;
     }
@@ -70,7 +72,8 @@ public class ListingController {
             @RequestParam(required = true) String category,
             @RequestParam(required = true) String sortby,
             @RequestParam(required = true) String order){
-        System.out.println("Received a request to get all listings for userid and category: " + uname);
+        System.out.println("getAllListingByCategoryByUser : Received a request to get all listings for " +
+                "userid : " + uname  + "and category : "+ category);
         GetListingResponse res = service.getAllListingByCategoryByUser(uname, category, sortby, order);
         return res;
     }
@@ -79,7 +82,8 @@ public class ListingController {
     @GetMapping("/topcategory")
     public GetTopCategoryResponse getAllTopCategoryListingByUser(
             @RequestParam(required = true) String uname){
-        System.out.println("Received a request to get all listings for userid of top category: " + uname);
+        System.out.println("getAllTopCategoryListingByUser : Received a request to get all listings " +
+                "of top category, uname : " + uname);
         GetTopCategoryResponse res = service.getTopCategoryInListings();
         return res;
     }

@@ -148,7 +148,7 @@ public class ListingServiceImpl implements  IListingService{
                                                             final String category,
                                                             final String sortby,
                                                             final String order) {
-        System.out.println("Inside getListingByUnameAndListingId service");
+        System.out.println("Inside getAllListingByCategoryByUser service");
         GetListingResponse  response = null;
         try {
             String message = null;
