@@ -9,6 +9,10 @@ public class CacheService {
     private static final PriorityQueue<CategoryCount> cache = new PriorityQueue<>((x,y)->
             Integer.compare(y.count, x.count));
 
+    public static void clear() {
+        cache.clear();
+    }
+
     static class CategoryCount{
         public String category;
         public int count;

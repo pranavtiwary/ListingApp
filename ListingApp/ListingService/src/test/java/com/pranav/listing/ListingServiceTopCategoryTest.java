@@ -6,22 +6,32 @@ import com.pranav.listing.response.GetTopCategoryResponse;
 import com.pranav.listing.service.CacheService;
 import com.pranav.listing.service.IListingService;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Locale;
 
 @SpringBootTest
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class ListingServiceTopCategoryTest {
 
     @Autowired
     private IListingService service;
+
+    @Before
+    public void setup(){
+        CacheService.clear();
+    }
 
     @Test
     public void testTopListing(){
