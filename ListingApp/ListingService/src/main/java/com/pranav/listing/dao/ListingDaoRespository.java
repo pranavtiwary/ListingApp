@@ -31,5 +31,9 @@ public interface ListingDaoRespository extends JpaRepository<Listing, Long> {
             nativeQuery = false)
     List<Listing> findByCategorySortTimeAsc_NQ(@Param("uname") String uname,
                                                @Param("category") String category);
-
+    @Query(value = "SELECT e.category FROM Listing e WHERE lower(e.uname) = lower(:uname) " +
+            "and lower(e.category) = lower(:category) " +
+            "ORDER BY e.createdOn ASC",
+            nativeQuery = false)
+    String getTopCategory();
 }

@@ -6,6 +6,7 @@ import com.pranav.listing.dto.ListingDTO;
 import com.pranav.listing.response.CreateListingResponse;
 import com.pranav.listing.response.DeleteListingResponse;
 import com.pranav.listing.response.GetListingResponse;
+import com.pranav.listing.response.GetTopCategoryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -42,6 +43,7 @@ public class ListingServiceImpl implements  IListingService{
             Listing listing = Listing.builder().title(title)
                     .uname(uname).category(category).description(description).price(price).build();
             Listing listingDb = repository.save(listing);
+            CacheService.updateOnCreate(category);
             response = CreateListingResponse.builder()
                     .isSuccess(true)
                     .message(SUCCESS)
@@ -185,6 +187,27 @@ public class ListingServiceImpl implements  IListingService{
     }
 
     @Override
+    public GetTopCategoryResponse getTopCategoryInListings() {
+        System.out.println("Inside getTopCategoryInListings service");
+        GetTopCategoryResponse  response = null;
+        try {
+            response = GetTopCategoryResponse.builder()
+                    .isSuccess(true)
+                    .message(SUCCESS)
+                    .category(CacheService.getTopCategory())
+                    .build();
+        }catch (Exception ex){
+            System.out.println("Error in getTopCategoryInListings");
+            ex.printStackTrace();
+            response = GetTopCategoryResponse.builder()
+                    .isSuccess(false)
+                    .message(FAILURE)
+                    .build();
+        }
+        return response;
+    }
+
+    @Override
     public DeleteListingResponse deleteListing(final Long listingid, final String uname) {
         System.out.println("Inside deleteListing service");
         DeleteListingResponse  response = null;
@@ -199,6 +222,7 @@ public class ListingServiceImpl implements  IListingService{
                     repository.deleteById(listing.getId());
                     message = SUCCESS;
                     isSuccess = true;
+                    CacheService.updateOnDelete(listing.getCategory());
                 }else{
                     message = DELETE_OWNER_NOT_FOUND;
                 }

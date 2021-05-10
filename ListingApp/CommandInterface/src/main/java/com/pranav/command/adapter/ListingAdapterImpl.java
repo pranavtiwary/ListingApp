@@ -44,7 +44,7 @@ public class ListingAdapterImpl implements  IListingAdapter{
     private String list_by_category_url;
 
     @Value("${getlisting.topcategory.byuser.service.url}")
-    private String list_by_to_category_url;
+    private String list_by_top_category_url;
 
     private RestTemplate restTemplate = new RestTemplate();
 
@@ -150,7 +150,7 @@ public class ListingAdapterImpl implements  IListingAdapter{
         System.out.println("Calling Listing service to Get listing by top category for an user");
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        StringBuilder sb = new StringBuilder(delete_listing_byuseruid_bylisitngid_url);
+        StringBuilder sb = new StringBuilder(list_by_top_category_url);
         sb.append("?");
         sb.append("uname="+userName);
         URI uri = URI.create(sb.toString());

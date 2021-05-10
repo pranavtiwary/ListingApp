@@ -69,8 +69,17 @@ public class ListingController {
             @RequestParam(required = true) String category,
             @RequestParam(required = true) String sortby,
             @RequestParam(required = true) String order){
-        System.out.println("Received a request to get all listings for userid : " + uname);
+        System.out.println("Received a request to get all listings for userid and category: " + uname);
         GetListingResponse res = service.getAllListingByCategoryByUser(uname, category, sortby, order);
+        return res;
+    }
+
+
+    @GetMapping("/topcategory")
+    public GetListingResponse getAllTopCategoryListingByUser(
+            @RequestParam(required = true) String uname){
+        System.out.println("Received a request to get all listings for userid of top category: " + uname);
+        GetListingResponse res = service.getTopCategoryInListings();
         return res;
     }
 }
