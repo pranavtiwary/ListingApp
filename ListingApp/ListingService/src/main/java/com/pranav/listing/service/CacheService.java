@@ -7,7 +7,7 @@ import java.util.PriorityQueue;
 public class CacheService {
 
     private static final PriorityQueue<CategoryCount> cache = new PriorityQueue<>((x,y)->
-            Integer.compare(x.count, y.count));
+            Integer.compare(y.count, x.count));
 
     static class CategoryCount{
         public String category;
@@ -15,6 +15,14 @@ public class CacheService {
         public CategoryCount(String category, int count){
             this.category=category;
             this.count =count;
+        }
+
+        @Override
+        public String toString() {
+            return "CategoryCount{" +
+                    "category='" + category + '\'' +
+                    ", count=" + count +
+                    '}';
         }
     }
 
@@ -48,5 +56,9 @@ public class CacheService {
             return "";
         }
         return cache.peek().category;
+    }
+
+    public static void printCache(){
+        System.out.println(cache);
     }
 }

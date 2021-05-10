@@ -3,6 +3,7 @@ package com.pranav.listing.controller;
 import com.pranav.listing.response.CreateListingResponse;
 import com.pranav.listing.response.DeleteListingResponse;
 import com.pranav.listing.response.GetListingResponse;
+import com.pranav.listing.response.GetTopCategoryResponse;
 import com.pranav.listing.service.IListingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -76,10 +77,10 @@ public class ListingController {
 
 
     @GetMapping("/topcategory")
-    public GetListingResponse getAllTopCategoryListingByUser(
+    public GetTopCategoryResponse getAllTopCategoryListingByUser(
             @RequestParam(required = true) String uname){
         System.out.println("Received a request to get all listings for userid of top category: " + uname);
-        GetListingResponse res = service.getTopCategoryInListings();
+        GetTopCategoryResponse res = service.getTopCategoryInListings();
         return res;
     }
 }
