@@ -64,17 +64,15 @@ public class ListingServiceImpl implements  IListingService{
         GetListingResponse  response = null;
         try {
             String message = null;
-            boolean isSuccess = false;
             Listing listing =  repository.findOneByIdAndUnameIgnoreCase(listingId, uname);
             List<ListingDTO> dtos = transformSingleModelIntoDTOs(listing);
             if(CollectionUtils.isEmpty(dtos)){
                 message = NOT_FOUND_LISTING;
             }else {
                 message = SUCCESS;
-                isSuccess = true;
             }
             response = GetListingResponse.builder()
-                    .isSuccess(isSuccess)
+                    .isSuccess(true)
                     .message(message)
                     .listings(dtos)
                     .build();
@@ -118,22 +116,65 @@ public class ListingServiceImpl implements  IListingService{
         try {
             String message = null;
             Listing listing = null;
-            boolean isSuccess = false;
             Optional<Listing> listingFromDb = repository.findById(listingid);
             if(listingFromDb.isPresent()){
                 listing = listingFromDb.get();
                 message = SUCCESS;
-                isSuccess = true;
             }else {
                 message = NOT_FOUND_LISTING;
             }
             response = GetListingResponse.builder()
-                    .isSuccess(isSuccess)
+                    .isSuccess(true)
                     .message(message)
                     .listings(transformModelsIntoDTOs(Arrays.asList(listing)))
                     .build();
         }catch (Exception ex){
             System.out.println("Error in getAllListingByUserId");
+            ex.printStackTrace();
+            response = GetListingResponse.builder()
+                    .isSuccess(false)
+                    .message(FAILURE)
+                    .build();
+        }
+        return response;
+    }
+
+    @Override
+    public GetListingResponse getAllListingByCategoryByUser(final String uname,
+                                                            final String category,
+                                                            final String sortby,
+                                                            final String order) {
+        System.out.println("Inside getListingByUnameAndListingId service");
+        GetListingResponse  response = null;
+        try {
+            String message = null;
+            List<Listing> listings = null;
+            if(sortby.equalsIgnoreCase("SORT_PRICE")
+                    && order.equalsIgnoreCase("DSC")){
+                listings =  repository.findByUnameIgnoreCaseAndCategoryIgnoreCaseOrderByPriceDesc(uname, category);
+            } else  if(sortby.equalsIgnoreCase("SORT_PRICE")
+                    && order.equalsIgnoreCase("ASC")){
+                listings =  repository.findByUnameIgnoreCaseAndCategoryIgnoreCaseOrderByPriceAsc(uname, category);
+            } else  if(sortby.equalsIgnoreCase("SORT_TIME")
+                    && order.equalsIgnoreCase("DSC")){
+                listings =  repository.findByCategorySortTimeDesc_NQ(uname, category);
+            } else if(sortby.equalsIgnoreCase("SORT_TIME")
+                    && order.equalsIgnoreCase("ASC")){
+                listings =  repository.findByCategorySortTimeAsc_NQ(uname, category);
+            }
+            List<ListingDTO> dtos = transformModelsIntoDTOs(listings);
+            if(CollectionUtils.isEmpty(dtos)){
+                message = NOT_FOUND_LISTING;
+            }else {
+                message = SUCCESS;
+            }
+            response = GetListingResponse.builder()
+                    .isSuccess(true)
+                    .message(message)
+                    .listings(dtos)
+                    .build();
+        }catch (Exception ex){
+            System.out.println("Error in getting Listing");
             ex.printStackTrace();
             response = GetListingResponse.builder()
                     .isSuccess(false)

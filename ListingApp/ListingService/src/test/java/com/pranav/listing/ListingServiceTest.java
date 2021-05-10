@@ -114,7 +114,6 @@ public class ListingServiceTest {
         Assert.assertNotNull(response2.getLisitngId());
 
         Assert.assertTrue(response.getLisitngId().longValue() != response2.getLisitngId().longValue());
-
     }
 
 

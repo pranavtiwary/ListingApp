@@ -18,4 +18,6 @@ public interface IListingService {
     DeleteListingResponse deleteListing(final Long listingid, final String uname);
 
     GetListingResponse getListById(final Long listingid);
+
+    GetListingResponse getAllListingByCategoryByUser(String uname, String category, String sortby, String order);
 }

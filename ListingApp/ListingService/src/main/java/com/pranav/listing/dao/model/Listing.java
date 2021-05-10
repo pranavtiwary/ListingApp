@@ -32,7 +32,7 @@ public class Listing {
     @Column(updatable = true, nullable = true)
     private String description;
     @Column(updatable = true, nullable = false)
-    private Double price;
+    private double price;
     @Column(updatable = true, nullable = false)
     private String category;
     @Column(updatable = true, nullable = false)

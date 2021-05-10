@@ -55,11 +55,22 @@ public class ListingController {
     }
 
     @GetMapping("/delete")
-    public DeleteListingResponse getAllListingByUserId(
+    public DeleteListingResponse deleteListingByUserIdAndListingId(
             @RequestParam(required = true) String uname,
             @RequestParam(required = true) Long listingid){
         System.out.println("Received a request to get all listings for userid : " + uname);
         DeleteListingResponse res = service.deleteListing(listingid, uname);
+        return res;
+    }
+
+    @GetMapping("/category")
+    public GetListingResponse getAllListingByCategoryByUser(
+            @RequestParam(required = true) String uname,
+            @RequestParam(required = true) String category,
+            @RequestParam(required = true) String sortby,
+            @RequestParam(required = true) String order){
+        System.out.println("Received a request to get all listings for userid : " + uname);
+        GetListingResponse res = service.getAllListingByCategoryByUser(uname, category, sortby, order);
         return res;
     }
 }
