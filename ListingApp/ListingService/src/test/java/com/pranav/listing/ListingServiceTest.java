@@ -63,7 +63,7 @@ public class ListingServiceTest {
         listingResponse =
                 service.getListingByUnameAndListingId("PRAnav", 12314253534l);
         Assert.assertNotNull(listingResponse);
-        Assert.assertFalse(listingResponse.isSuccess());
+        Assert.assertTrue(listingResponse.isSuccess());
         Assert.assertNull(listingResponse.getListings());
         Assert.assertEquals(NOT_FOUND_LISTING,listingResponse.getMessage());
     }
