@@ -18,12 +18,12 @@ Internal Module
 2. Maven 3.6.3
 
 #Code Setup 
-https://github.com/pranavtiwary/ListingApp.git
+git clone https://github.com/pranavtiwary/ListingApp.git
 git@github.com:pranavtiwary/ListingApp.git
 
 #Run Book :
     1. Open a new terminal and go to project root directory 
-        eg : cd /Volumes/HD2/Research/ListingApp
+        eg : cd /Volumes/HD2/ListingApp/ListingApp
         (you may need to change mod "chmod 777 *.sh")
         Run command "./compile.sh"
         Description: Its runs "mvn clean install" and build/test/create jar file for all our modules
