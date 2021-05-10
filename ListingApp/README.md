@@ -22,6 +22,7 @@ git clone https://github.com/pranavtiwary/ListingApp.git
 git@github.com:pranavtiwary/ListingApp.git
 
 #Run Book :
+
     1. Open a new terminal and go to project root directory 
         eg : cd /Volumes/HD2/ListingApp/ListingApp
         (you may need to change mod "chmod 777 *.sh")
