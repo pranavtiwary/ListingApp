@@ -1,6 +1,7 @@
 package com.pranav.command.adapter;
 
 import com.pranav.command.response.CreateListingResponse;
+import com.pranav.command.response.DeleteListingResponse;
 import com.pranav.command.response.GetListingResponse;
 
 public interface IListingAdapter {
@@ -13,4 +14,7 @@ public interface IListingAdapter {
 
     GetListingResponse getListingByUserIdAndListingId(final String uname,
                                                       final String listingid);
+
+    DeleteListingResponse deleteListingByUserIdAndListingId(final String uname,
+                                                            final String listingid);
 }

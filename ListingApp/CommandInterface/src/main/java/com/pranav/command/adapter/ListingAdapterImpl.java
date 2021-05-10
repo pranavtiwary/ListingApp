@@ -2,6 +2,7 @@ package com.pranav.command.adapter;
 
 import com.pranav.command.response.CreateListingResponse;
 import com.pranav.command.response.CreateUserResponse;
+import com.pranav.command.response.DeleteListingResponse;
 import com.pranav.command.response.GetListingResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -36,6 +37,9 @@ public class ListingAdapterImpl implements  IListingAdapter{
     @Value("${getlisting.bylistingId.service.url}")
     private String list_by_listingid_url;
 
+    @Value("${deletelisting.bylistingId.byuserid.service.url}")
+    private String delete_listing_byuseruid_bylisitngid_url;
+
     private RestTemplate restTemplate = new RestTemplate();
 
     public CreateListingResponse createListing(final String uname,
@@ -58,17 +62,17 @@ public class ListingAdapterImpl implements  IListingAdapter{
                 create_url, request , CreateListingResponse.class);
         CreateListingResponse response = null;
         if(HttpStatus.OK == httpResponse.getStatusCode()){
-            System.out.println("Got 200 Response from user service");
+            System.out.println("Got 200 Response from Listing service");
             response = httpResponse.getBody();
         }else{
-            System.out.println("Got non-200 Response from user service");
+            System.out.println("Got non-200 Response from Listing service");
         }
         return response;
     }
 
     public GetListingResponse getListingByUserIdAndListingId(final String uname,
                                                              final String listingid){
-        System.out.println("Calling Listing service to Create listing");
+        System.out.println("Calling Listing service to Get listing");
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         StringBuilder sb = new StringBuilder(list_by_userid_lisitngid_url);
@@ -80,10 +84,33 @@ public class ListingAdapterImpl implements  IListingAdapter{
                 uri , GetListingResponse.class);
         GetListingResponse response = null;
         if(HttpStatus.OK == httpResponse.getStatusCode()){
-            System.out.println("Got 200 Response from user service");
+            System.out.println("Got 200 Response from Listing service");
             response = httpResponse.getBody();
         }else{
-            System.out.println("Got non-200 Response from user service");
+            System.out.println("Got non-200 Response from Listing service");
+        }
+        return response;
+    }
+
+    // TODO : Move to http.delete
+    @Override
+    public DeleteListingResponse deleteListingByUserIdAndListingId(String uname, String listingid) {
+        System.out.println("Calling Listing service to Delete listing");
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        StringBuilder sb = new StringBuilder(list_by_userid_lisitngid_url);
+        sb.append("?");
+        sb.append("uname="+uname);
+        sb.append("listingid="+listingid);
+        URI uri = URI.create(sb.toString());
+        ResponseEntity<DeleteListingResponse> httpResponse = restTemplate.getForEntity(
+                uri , DeleteListingResponse.class);
+        DeleteListingResponse response = null;
+        if(HttpStatus.OK == httpResponse.getStatusCode()){
+            System.out.println("Got 200 Response from Listing service");
+            response = httpResponse.getBody();
+        }else{
+            System.out.println("Got non-200 Response from Listing service");
         }
         return response;
     }

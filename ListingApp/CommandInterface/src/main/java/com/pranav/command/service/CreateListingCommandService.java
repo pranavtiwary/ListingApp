@@ -39,10 +39,10 @@ public class CreateListingCommandService implements ICommandService {
                     System.out.println(response.getMessage());
                 }
             } else {
-                System.out.println("User does not exists");
+                System.out.println("Error - unknown user");
             }
         }catch (Exception ex){
-            System.out.println("Error while creating listing");
+            System.out.println("Error while CreateListingCommandService");
             ex.printStackTrace();
         }
     }

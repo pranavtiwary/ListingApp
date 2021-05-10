@@ -2,19 +2,16 @@ package com.pranav.command.service;
 
 import com.pranav.command.adapter.IListingAdapter;
 import com.pranav.command.adapter.IUserAdapter;
-import com.pranav.command.response.CreateListingResponse;
 import com.pranav.command.response.GetListingResponse;
 import com.pranav.command.response.GetUserResponse;
 import com.pranav.command.response.ListingDTO;
-import com.pranav.command.type.CreateListingCmd;
 import com.pranav.command.type.GetListingCmd;
 import com.pranav.command.type.ICommand;
-import com.pranav.command.type.RegisterUserCmd;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("GetListingCommandService")
-public class GetListingCommandService implements ICommandService {
+@Service("GetCategoryListingCmdService")
+public class GetCategoryListingCmdService implements ICommandService {
 
     @Autowired
     private IListingAdapter listingAdapter;

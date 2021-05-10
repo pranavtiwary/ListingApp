@@ -1,6 +1,7 @@
 package com.pranav.listing.controller;
 
 import com.pranav.listing.response.CreateListingResponse;
+import com.pranav.listing.response.DeleteListingResponse;
 import com.pranav.listing.response.GetListingResponse;
 import com.pranav.listing.service.IListingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +52,14 @@ public class ListingController {
         System.out.println("Received a request to get all listings for userid : " + uname);
         GetListingResponse listingByUserId = service.getAllListingByUserId(uname);
         return listingByUserId;
+    }
+
+    @GetMapping("/delete")
+    public DeleteListingResponse getAllListingByUserId(
+            @RequestParam(required = true) String uname,
+            @RequestParam(required = true) Long listingid){
+        System.out.println("Received a request to get all listings for userid : " + uname);
+        DeleteListingResponse res = service.deleteListing(listingid, uname);
+        return res;
     }
 }

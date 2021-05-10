@@ -3,6 +3,8 @@ package com.pranav.command.service;
 
 import com.pranav.command.error.CommandNotValidException;
 import com.pranav.command.type.CreateListingCmd;
+import com.pranav.command.type.DeleteListingCmd;
+import com.pranav.command.type.GetCategoryListingCmd;
 import com.pranav.command.type.GetListingCmd;
 import com.pranav.command.type.ICommand;
 import com.pranav.command.type.RegisterUserCmd;
@@ -36,6 +38,14 @@ public class CommandFactoryService {
     @Qualifier("GetListingCommandService")
     private ICommandService getListingCommandService;
 
+    @Autowired
+    @Qualifier("DeleteListingCommandService")
+    private ICommandService getDeleteListingCmdService;
+
+    @Autowired
+    @Qualifier("GetCategoryListingCmdService")
+    private ICommandService getCategoryListingCmdService;
+
 
     public ICommand createCommand(String input) {
         if(!StringUtils.hasLength(input)){
@@ -47,7 +57,7 @@ public class CommandFactoryService {
         while (m.find()){
             list.add(m.group(1).replace("'", ""));
         }
-        System.out.println(list);
+        System.out.println("Command List : " + list);
         String commandName = list.get(0);
         switch (commandName){
             case RegisterUserCmd.COMMAND_NAME:
@@ -58,6 +68,12 @@ public class CommandFactoryService {
                 break;
             case GetListingCmd.COMMAND_NAME:
                 command = new GetListingCmd(list, getListingCommandService);
+                break;
+            case DeleteListingCmd.COMMAND_NAME:
+                command = new DeleteListingCmd(list, getDeleteListingCmdService);
+                break;
+            case GetCategoryListingCmd.COMMAND_NAME:
+                command = new GetCategoryListingCmd(list, getCategoryListingCmdService);
                 break;
         }
         if(Objects.isNull(command)){
