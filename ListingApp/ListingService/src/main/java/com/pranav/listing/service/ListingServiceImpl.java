@@ -24,6 +24,7 @@ public class ListingServiceImpl implements  IListingService{
     public static final String SUCCESS="Success";
     public static final String FAILURE="Error At Server";
     public static final String NOT_FOUND_LISTING="Error - not found";
+    public static final String CATEGORY_NOT_FOUND_LISTING="Error - category not found";
     public static final String DELETE_NOT_FOUND_LISTING= "Error - listing does not exist";
     public static final String DELETE_OWNER_NOT_FOUND= "Error - listing owner mismatch";
 
@@ -167,7 +168,7 @@ public class ListingServiceImpl implements  IListingService{
             }
             List<ListingDTO> dtos = transformModelsIntoDTOs(listings);
             if(CollectionUtils.isEmpty(dtos)){
-                message = NOT_FOUND_LISTING;
+                message = CATEGORY_NOT_FOUND_LISTING;
             }else {
                 message = SUCCESS;
             }

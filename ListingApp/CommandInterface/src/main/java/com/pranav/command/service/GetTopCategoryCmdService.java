@@ -25,6 +25,7 @@ public class GetTopCategoryCmdService implements ICommandService {
     public void execute(ICommand command){
         if(!(command instanceof GetTopCategoryListingCmd)){
             System.out.println("Get Listing Command Service can only execute on GetTopCategoryListingCmd");
+            return;
         }
         try {
             GetTopCategoryListingCmd cmd = (GetTopCategoryListingCmd) command;

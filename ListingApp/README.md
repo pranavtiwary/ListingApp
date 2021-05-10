@@ -1,22 +1,27 @@
 # ListingApp
-
-Software Required :
-1. JDK 1.8
-2. Maven 3.6.3
+Listing App listens to command and create user and listing in the application. Its display on microservice architecture.
 
 Internal Module
 
 1. CommandInterface : Spring boot application, provides command interface to communicate to user and listing service.
-    ->Dependencies : JDK 8, Maven 3.6.3, Spring boot 2.4.5
+   ->Dependencies : JDK 8, Maven 3.6.3, Spring boot 2.4.5
 
 2. UserService : Spring boot web and security application. Hold user authentication information
-    ->Dependencies : JDK 8, Maven 3.6.3, Spring boot 2.4.5, Spring security, Spring data and In memmory H2 DB.
+   ->Dependencies : JDK 8, Maven 3.6.3, Spring boot 2.4.5, Spring security, Spring data and In memmory H2 DB.
 
 3. CommandInterface : Spring boot web application, holds listing service.
-    ->Dependencies : JDK 8, Maven 3.6.3, Spring boot 2.4.5, Spring Web, Spring data and In memmory H2 DB.
+   ->Dependencies : JDK 8, Maven 3.6.3, Spring boot 2.4.5, Spring Web, Spring data and In memmory H2 DB.
 
 
-Run Book :
+# Software Required :
+1. JDK 1.8
+2. Maven 3.6.3
+
+#Code Setup 
+https://github.com/pranavtiwary/ListingApp.git
+git@github.com:pranavtiwary/ListingApp.git
+
+#Run Book :
     1. Open a new terminal and go to project root directory 
         eg : cd /Volumes/HD2/Research/ListingApp
         (you may need to change mod "chmod 777 *.sh")
@@ -39,7 +44,7 @@ Run Book :
         This is where we enter command line input.
 
 
-How to interact?
+#How to interact?
 1. Go to terminal where you have opened command interface
 2. You can interact with admin of h2 db, see section how to run h2 db admin.
 

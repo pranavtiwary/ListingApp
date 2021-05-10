@@ -85,6 +85,6 @@ public class ListingServiceCategoryTest {
         System.out.println(listingResponse5);
         Assert.assertNotNull(listingResponse5);
         Assert.assertTrue(listingResponse5.isSuccess());
-        Assert.assertNull(listingResponse5.getListings());
+        Assert.assertNotNull(listingResponse5.getListings());
     }
 }

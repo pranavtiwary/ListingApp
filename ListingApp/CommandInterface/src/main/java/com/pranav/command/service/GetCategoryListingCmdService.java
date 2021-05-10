@@ -21,8 +21,9 @@ public class GetCategoryListingCmdService implements ICommandService {
     private IUserAdapter userAdapter;
 
     public void execute(ICommand command){
-        if(!(command instanceof GetListingCmd)){
-            System.out.println("Get Listing Command Service can only execute on GetListingCmd");
+        if(!(command instanceof GetCategoryListingCmd)){
+            System.out.println("Get Listing Command Service can only execute on GetCategoryListingCmd");
+            return;
         }
         try {
             GetCategoryListingCmd cmd = (GetCategoryListingCmd) command;

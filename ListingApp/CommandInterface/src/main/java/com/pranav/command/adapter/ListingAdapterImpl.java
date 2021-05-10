@@ -54,7 +54,7 @@ public class ListingAdapterImpl implements  IListingAdapter{
                                                final String description,
                                                final Double price,
                                                final String category){
-        System.out.println("Calling Listing service to Create listing");
+        //System.out.println("Calling Listing service to Create listing");
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
@@ -69,7 +69,6 @@ public class ListingAdapterImpl implements  IListingAdapter{
                 create_url, request , CreateListingResponse.class);
         CreateListingResponse response = null;
         if(HttpStatus.OK == httpResponse.getStatusCode()){
-            System.out.println("Got 200 Response from Listing service");
             response = httpResponse.getBody();
         }else{
             System.out.println("Got non-200 Response from Listing service");
@@ -79,7 +78,7 @@ public class ListingAdapterImpl implements  IListingAdapter{
 
     public GetListingResponse getListingByUserIdAndListingId(final String uname,
                                                              final String listingid){
-        System.out.println("Calling Listing service to Get listing");
+        //System.out.println("Calling Listing service to Get listing");
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         StringBuilder sb = new StringBuilder(list_by_userid_lisitngid_url);
@@ -92,7 +91,6 @@ public class ListingAdapterImpl implements  IListingAdapter{
                 uri , GetListingResponse.class);
         GetListingResponse response = null;
         if(HttpStatus.OK == httpResponse.getStatusCode()){
-            System.out.println("Got 200 Response from Listing service");
             response = httpResponse.getBody();
         }else{
             System.out.println("Got non-200 Response from Listing service");
@@ -103,7 +101,7 @@ public class ListingAdapterImpl implements  IListingAdapter{
     // TODO : Move to http.delete
     @Override
     public DeleteListingResponse deleteListingByUserIdAndListingId(String uname, String listingid) {
-        System.out.println("Calling Listing service to Delete listing");
+        //System.out.println("Calling Listing service to Delete listing");
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         StringBuilder sb = new StringBuilder(list_by_userid_lisitngid_url);
@@ -116,7 +114,6 @@ public class ListingAdapterImpl implements  IListingAdapter{
                 uri , DeleteListingResponse.class);
         DeleteListingResponse response = null;
         if(HttpStatus.OK == httpResponse.getStatusCode()){
-            System.out.println("Got 200 Response from Listing service");
             response = httpResponse.getBody();
         }else{
             System.out.println("Got non-200 Response from Listing service");
@@ -126,7 +123,7 @@ public class ListingAdapterImpl implements  IListingAdapter{
 
     @Override
     public GetListingResponse getListingByCategory(String userName, String category, String sortby, String order) {
-        System.out.println("Calling Listing service to Get listing by category");
+        //System.out.println("Calling Listing service to Get listing by category");
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         StringBuilder sb = new StringBuilder(list_by_category_url);
@@ -143,7 +140,6 @@ public class ListingAdapterImpl implements  IListingAdapter{
                 uri , GetListingResponse.class);
         GetListingResponse response = null;
         if(HttpStatus.OK == httpResponse.getStatusCode()){
-            System.out.println("Got 200 Response from Listing service");
             response = httpResponse.getBody();
         }else{
             System.out.println("Got non-200 Response from Listing service");
@@ -153,7 +149,7 @@ public class ListingAdapterImpl implements  IListingAdapter{
 
     @Override
     public GetTopCategoryResponse getListingByTopCategoryByUser(final String userName) {
-        System.out.println("Calling Listing service to Get listing by top category for an user");
+        //System.out.println("Calling Listing service to Get listing by top category for an user");
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         StringBuilder sb = new StringBuilder(list_by_top_category_url);
@@ -164,7 +160,6 @@ public class ListingAdapterImpl implements  IListingAdapter{
                 uri , GetTopCategoryResponse.class);
         GetTopCategoryResponse response = null;
         if(HttpStatus.OK == httpResponse.getStatusCode()){
-            System.out.println("Got 200 Response from Listing service");
             response = httpResponse.getBody();
         }else{
             System.out.println("Got non-200 Response from Listing service");

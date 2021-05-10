@@ -24,6 +24,7 @@ public class DeleteListingCommandService implements ICommandService {
     public void execute(ICommand command){
         if(!(command instanceof DeleteListingCmd)){
             System.out.println("Get Delete Listing Command Service can only execute on DeleteListingCmd");
+            return;
         }
         try {
             DeleteListingCmd cmd = (DeleteListingCmd) command;

@@ -6,6 +6,7 @@ import com.pranav.command.type.CreateListingCmd;
 import com.pranav.command.type.DeleteListingCmd;
 import com.pranav.command.type.GetCategoryListingCmd;
 import com.pranav.command.type.GetListingCmd;
+import com.pranav.command.type.GetTopCategoryListingCmd;
 import com.pranav.command.type.ICommand;
 import com.pranav.command.type.RegisterUserCmd;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,10 @@ public class CommandFactoryService {
     @Qualifier("GetCategoryListingCmdService")
     private ICommandService getCategoryListingCmdService;
 
+    @Autowired
+    @Qualifier("GetTopCategoryListingCmdService")
+    private ICommandService getTopCategoryListingCmdService;
+
 
     public ICommand createCommand(String input) {
         if(!StringUtils.hasLength(input)){
@@ -57,7 +62,7 @@ public class CommandFactoryService {
         while (m.find()){
             list.add(m.group(1).replace("'", ""));
         }
-        System.out.println("Command List : " + list);
+        //System.out.println("Command List : " + list);
         String commandName = list.get(0);
         switch (commandName){
             case RegisterUserCmd.COMMAND_NAME:
@@ -74,6 +79,9 @@ public class CommandFactoryService {
                 break;
             case GetCategoryListingCmd.COMMAND_NAME:
                 command = new GetCategoryListingCmd(list, getCategoryListingCmdService);
+                break;
+            case GetTopCategoryListingCmd.COMMAND_NAME:
+                command = new GetTopCategoryListingCmd(list, getTopCategoryListingCmdService);
                 break;
         }
         if(Objects.isNull(command)){

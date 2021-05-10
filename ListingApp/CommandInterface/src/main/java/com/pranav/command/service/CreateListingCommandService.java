@@ -21,7 +21,8 @@ public class CreateListingCommandService implements ICommandService {
 
     public void execute(ICommand command){
         if(!(command instanceof CreateListingCmd)){
-            System.out.println("Create listing Command Service can only execute on RegisterUserCmd");
+            System.out.println("Create listing Command Service can only execute on CreateListingCmd");
+            return;
         }
         try {
             CreateListingCmd createLstCmd = (CreateListingCmd) command;

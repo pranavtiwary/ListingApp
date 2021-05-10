@@ -25,6 +25,7 @@ public class GetListingCommandService implements ICommandService {
     public void execute(ICommand command){
         if(!(command instanceof GetListingCmd)){
             System.out.println("Get Listing Command Service can only execute on GetListingCmd");
+            return;
         }
         try {
             GetListingCmd cmd = (GetListingCmd) command;

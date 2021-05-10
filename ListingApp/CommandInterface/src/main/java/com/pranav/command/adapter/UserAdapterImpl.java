@@ -30,7 +30,7 @@ public class UserAdapterImpl implements  IUserAdapter{
 
     @Override
     public CreateUserResponse registerUser(final String username){
-        System.out.println("Calling user service to Register user : "+ username);
+        //System.out.println("Calling user service to Register user : "+ username);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
@@ -41,7 +41,6 @@ public class UserAdapterImpl implements  IUserAdapter{
                 create_userServiceUrl, request , CreateUserResponse.class);
         CreateUserResponse response = null;
         if(HttpStatus.OK == httpResponse.getStatusCode()){
-            System.out.println("Got 200 Response from user service");
             response = httpResponse.getBody();
         }else{
             System.out.println("Got non-200 Response from user service");
@@ -51,12 +50,11 @@ public class UserAdapterImpl implements  IUserAdapter{
 
     @Override
     public GetUserResponse getUser(final String username){
-        System.out.println("Calling user service to get user : "+ username);
+        //System.out.println("Calling user service to get user : "+ username);
         ResponseEntity<GetUserResponse> httpResponse =
                 restTemplate.getForEntity(get_userServiceUrl+username, GetUserResponse.class);
         GetUserResponse response = null;
         if(HttpStatus.OK == httpResponse.getStatusCode()){
-            System.out.println("Got 200 Response from user service");
             response = httpResponse.getBody();
         }else{
             System.out.println("Got non-200 Response from user service");
