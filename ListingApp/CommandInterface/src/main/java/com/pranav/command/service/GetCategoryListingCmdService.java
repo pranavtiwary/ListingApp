@@ -5,6 +5,7 @@ import com.pranav.command.adapter.IUserAdapter;
 import com.pranav.command.response.GetListingResponse;
 import com.pranav.command.response.GetUserResponse;
 import com.pranav.command.response.ListingDTO;
+import com.pranav.command.type.GetCategoryListingCmd;
 import com.pranav.command.type.GetListingCmd;
 import com.pranav.command.type.ICommand;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,12 @@ public class GetCategoryListingCmdService implements ICommandService {
             System.out.println("Get Listing Command Service can only execute on GetListingCmd");
         }
         try {
-            GetListingCmd cmd = (GetListingCmd) command;
+            GetCategoryListingCmd cmd = (GetCategoryListingCmd) command;
             GetUserResponse userCheck = userAdapter.getUser(cmd.getUserName());
             if (null != userCheck && null != userCheck.getData()) {
                 GetListingResponse response =
-                        listingAdapter.getListingByUserIdAndListingId(
-                                cmd.getUserName(), cmd.getListingid());
+                        listingAdapter.getListingByCategory(
+                                cmd.getUserName(), cmd.getCategory(), cmd.getSortby(), cmd.getOrder());
                 if(response.getIsSuccess()){
                     for(ListingDTO dto : response.getListings()){
                         StringBuilder sb = new StringBuilder();

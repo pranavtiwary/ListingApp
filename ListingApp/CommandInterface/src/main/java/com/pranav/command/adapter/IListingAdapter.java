@@ -17,4 +17,9 @@ public interface IListingAdapter {
 
     DeleteListingResponse deleteListingByUserIdAndListingId(final String uname,
                                                             final String listingid);
+
+    GetListingResponse getListingByCategory(final String userName,
+                                            final String category,
+                                            final String sortby,
+                                            final String order);
 }
