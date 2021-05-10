@@ -43,6 +43,9 @@ public class ListingAdapterImpl implements  IListingAdapter{
     @Value("${getlisting.bycategory.service.url}")
     private String list_by_category_url;
 
+    @Value("${getlisting.topcategory.byuser.service.url}")
+    private String list_by_to_category_url;
+
     private RestTemplate restTemplate = new RestTemplate();
 
     public CreateListingResponse createListing(final String uname,
@@ -123,12 +126,33 @@ public class ListingAdapterImpl implements  IListingAdapter{
         System.out.println("Calling Listing service to Get listing by category");
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        StringBuilder sb = new StringBuilder(delete_listing_byuseruid_bylisitngid_url);
+        StringBuilder sb = new StringBuilder(list_by_category_url);
         sb.append("?");
         sb.append("uname="+userName);
         sb.append("category="+category);
         sb.append("sortby="+sortby);
         sb.append("order="+order);
+        URI uri = URI.create(sb.toString());
+        ResponseEntity<GetListingResponse> httpResponse = restTemplate.getForEntity(
+                uri , GetListingResponse.class);
+        GetListingResponse response = null;
+        if(HttpStatus.OK == httpResponse.getStatusCode()){
+            System.out.println("Got 200 Response from Listing service");
+            response = httpResponse.getBody();
+        }else{
+            System.out.println("Got non-200 Response from Listing service");
+        }
+        return response;
+    }
+
+    @Override
+    public GetListingResponse getListingByTopCategoryByUser(final String userName) {
+        System.out.println("Calling Listing service to Get listing by top category for an user");
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        StringBuilder sb = new StringBuilder(delete_listing_byuseruid_bylisitngid_url);
+        sb.append("?");
+        sb.append("uname="+userName);
         URI uri = URI.create(sb.toString());
         ResponseEntity<GetListingResponse> httpResponse = restTemplate.getForEntity(
                 uri , GetListingResponse.class);

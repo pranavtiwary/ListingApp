@@ -22,4 +22,6 @@ public interface IListingAdapter {
                                             final String category,
                                             final String sortby,
                                             final String order);
+
+    GetListingResponse getListingByTopCategoryByUser(final String userName);
 }

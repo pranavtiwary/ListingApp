@@ -7,12 +7,13 @@ import com.pranav.command.response.GetUserResponse;
 import com.pranav.command.response.ListingDTO;
 import com.pranav.command.type.GetCategoryListingCmd;
 import com.pranav.command.type.GetListingCmd;
+import com.pranav.command.type.GetTopCategoryListingCmd;
 import com.pranav.command.type.ICommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("GetCategoryListingCmdService")
-public class GetCategoryListingCmdService implements ICommandService {
+@Service("GetTopCategoryListingCmdService")
+public class GetTopCategoryListingCmdService implements ICommandService {
 
     @Autowired
     private IListingAdapter listingAdapter;
@@ -21,16 +22,16 @@ public class GetCategoryListingCmdService implements ICommandService {
     private IUserAdapter userAdapter;
 
     public void execute(ICommand command){
-        if(!(command instanceof GetListingCmd)){
-            System.out.println("Get Listing Command Service can only execute on GetListingCmd");
+        if(!(command instanceof GetTopCategoryListingCmd)){
+            System.out.println("Get Listing Command Service can only execute on GetTopCategoryListingCmd");
         }
         try {
-            GetCategoryListingCmd cmd = (GetCategoryListingCmd) command;
+            GetTopCategoryListingCmd cmd = (GetTopCategoryListingCmd) command;
             GetUserResponse userCheck = userAdapter.getUser(cmd.getUserName());
             if (null != userCheck && null != userCheck.getData()) {
                 GetListingResponse response =
-                        listingAdapter.getListingByCategory(
-                                cmd.getUserName(), cmd.getCategory(), cmd.getSortby(), cmd.getOrder());
+                        listingAdapter.getListingByTopCategoryByUser(
+                                cmd.getUserName());
                 if(response.getIsSuccess()){
                     for(ListingDTO dto : response.getListings()){
                         StringBuilder sb = new StringBuilder();
