@@ -1,5 +1,5 @@
 # ListingApp
-Listing App listens to command and create user and listing in the application. Its display on microservice architecture.
+Listing App listens to command provided through command line interface. And then these commands is sent acroos to user service and listing service which runs as separate application. It is based on microservice architecture.
 
 Internal Module
 
