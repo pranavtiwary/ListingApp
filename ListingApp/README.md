@@ -7,10 +7,10 @@ Internal Module
    ->Dependencies : JDK 8, Maven 3.6.3, Spring boot 2.4.5
 
 2. UserService : Spring boot web and security application. Hold user authentication information
-   ->Dependencies : JDK 8, Maven 3.6.3, Spring boot 2.4.5, Spring security, Spring data and In memmory H2 DB.
+   ->Dependencies : JDK 8, Maven 3.6.3, Spring boot 2.4.5, Spring security, Spring data and In memory H2 DB.
 
 3. CommandInterface : Spring boot web application, holds listing service.
-   ->Dependencies : JDK 8, Maven 3.6.3, Spring boot 2.4.5, Spring Web, Spring data and In memmory H2 DB.
+   ->Dependencies : JDK 8, Maven 3.6.3, Spring boot 2.4.5, Spring Web, Spring data and In memory H2 DB.
 
 
 # Software Required :
